@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+在布局中跟节点添加layout
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!--
+        xml数据绑定，name表示数据对象名称
+        type：表示包名
+         -->
+        <variable
+            name="user"
+            type="tsou.cn.databinding.bean.User" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--
+        这里的bind:url="@{user.imageUrl}"即为调用 @BindingAdapter({"url"}绑定的数据
+        -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            bind:url="@{user.imageUrl}"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.imageUrl}" />
+    </LinearLayout>
+</layout>
+

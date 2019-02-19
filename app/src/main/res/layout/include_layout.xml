@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+在布局中跟节点添加layout
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <!--
+        xml数据绑定，name表示数据对象名称
+        type：表示包名
+         -->
+        <variable
+            name="user"
+            type="tsou.cn.databinding.bean.User" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{user.fristName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{user.lastName}" />
+
+    </LinearLayout>
+</layout>
+

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+第二步：在布局中跟节点添加layout
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <!--
+        第四步：xml数据绑定，name表示数据对象名称
+        type：表示包名
+         -->
+        <variable
+            name="user"
+            type="tsou.cn.databinding.bean.User" />
+        <!--
+          第五步：事件绑定
+          name：类名
+          type:表示包名
+        -->
+        <variable
+            name="presenter"
+            type="tsou.cn.databinding.MainActivity.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="tsou.cn.databinding.MainActivity">
+
+        <ViewStub
+            android:id="@+id/view_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/viewstub"
+            bind:user="@{user}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="是否显示"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:visibility="@{user.isShow ? View.VISIBLE:View.GONE }" />
+        <!--
+          建议使用
+         android:onTextChanged="@{presenter::onTextChanged}"
+         可以将方法的绑定和普通函数的调用或数据绑定，区分开
+        -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入 Frist Name"
+            android:onTextChanged="@{presenter::onTextChanged}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入 Last Name" />
+
+        <!--
+         普通方法绑定
+          建议使用
+          android:onClick="@{presenter::onClick}"
+         可以将方法的绑定和普通函数的调用或数据绑定，区分开
+        -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@{true ? @color/colorAccent : @color/colorPrimary}"
+            android:onClick="@{presenter::onClick}"
+            android:text="@{user.fristName,default=这是默认数据}" />
+        <!--
+            监听器绑定，可以返回数据
+        -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="@{()->presenter.onClickListenerBinding(user)}"
+            android:text="@{user.lastName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{user.nums[0]}" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text='@{user.maps["name"]}' />
+
+        <include
+            layout="@layout/include_layout"
+            bind:user="@{user}" />
+        <Button
+            android:layout_width="match_parent"
+            android:onClick="@{presenter::onGoToDynamicActivity}"
+            android:text="跳转到DynamicActivity页面"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="match_parent"
+            android:onClick="@{presenter::onGoToRecyclerViewActivity}"
+            android:text="跳转到RecyclerViewActivity页面"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="match_parent"
+            android:onClick="@{presenter::onGoToLoadMoreRecyclerViewActivity}"
+            android:text="跳转到上拉加载更多，下拉刷新页面"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>
+

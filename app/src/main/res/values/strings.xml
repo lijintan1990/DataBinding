@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DataBinding</string>
+    <string name="error_note">加载失败，点击重新加载...</string>
+    <string name="the_server_did_not_return_data">未搜索到数据,点击重新加载...</string>
+</resources>
